@@ -19,11 +19,13 @@ mongoose.connect(process.env.MONGO_DB_URI, { useNewUrlParser: true, useUnifiedTo
     .catch(err => console.log(err));
 
 // Routes
-// app.use('/',(req,res)=>{
-//     res.send("Welcome to Task Manager")
-// })
 app.use('/auth', authRoutes);
 app.use('/task',taskRoutes)
+
+// Catch all routes
+app.use('/',(req,res)=>{
+    res.send("Welcome to Task Manager")
+})
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
